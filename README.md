@@ -156,6 +156,28 @@ NEXT_PUBLIC_SITE_URL=https://你的正式網域
 https://你的正式網域/sitemap.xml
 ```
 
+## DigitalOcean Droplet 部署
+
+本專案可用 Nginx + PM2 部署在 Droplet。預設 production app 目錄為 `/var/www/shinhai`，PM2 app 名稱為 `shinhai`，Next.js 監聽 `127.0.0.1:3100`。
+
+首次部署：
+
+```bash
+cd /var/www/shinhai
+pnpm install --frozen-lockfile
+pnpm build
+pm2 start ecosystem.config.cjs --only shinhai
+pm2 save
+```
+
+後續更新：
+
+```bash
+cd /var/www/shinhai
+git pull
+bash scripts/deploy.sh
+```
+
 ## 主要目錄
 
 ```text
