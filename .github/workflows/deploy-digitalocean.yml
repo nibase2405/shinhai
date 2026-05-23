@@ -25,8 +25,8 @@ jobs:
           set -euo pipefail
 
           if [ -z "${DO_HOST}" ] || [ -z "${DO_USER}" ] || [ -z "${DO_SSH_KEY}" ]; then
-            echo "::warning::Missing one of required secrets: DO_HOST, DO_USER, DO_SSH_KEY. Deployment skipped."
-            exit 0
+            echo "::error::Missing one of required secrets: DO_HOST, DO_USER, DO_SSH_KEY"
+            exit 1
           fi
 
           mkdir -p ~/.ssh
