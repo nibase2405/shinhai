@@ -48,7 +48,7 @@ export default function HomePage() {
               <FerrisWheel className="h-4 w-4" />
               台灣人上海自由行攻略 MVP
             </div>
-            <h1 className="max-w-[11em] break-all text-3xl font-bold leading-tight sm:max-w-2xl sm:text-4xl md:text-6xl">上海自由行，從攻略到訂票一次整理</h1>
+            <h1 className="max-w-[11em] break-all text-3xl font-bold leading-tight sm:max-w-2xl sm:text-4xl md:text-6xl">上海自由行攻略</h1>
             <p className="text-base leading-7 text-white/86 md:text-lg">
               搜尋景點、美食、住宿與 SEO 攻略文章，快速規劃外灘、迪士尼、南京路與上海老字號美食行程。
             </p>
