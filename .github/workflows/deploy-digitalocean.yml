@@ -19,37 +19,21 @@ jobs:
         env:
           DO_HOST: ${{ secrets.DO_HOST }}
           DO_USER: ${{ secrets.DO_USER }}
-          DO_PORT: ${{ secrets.DO_PORT }}
           DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}
         run: |
           set -euo pipefail
-
-          missing=0
-          if [ -z "${DO_HOST}" ]; then
-            echo "::error::Missing required secret: DO_HOST"
-            missing=1
-          fi
-          if [ -z "${DO_USER}" ]; then
-            echo "::error::Missing required secret: DO_USER"
-            missing=1
-          fi
-          if [ -z "${DO_SSH_KEY}" ]; then
-            echo "::error::Missing required secret: DO_SSH_KEY"
-            missing=1
-          fi
-          if [ "$missing" -ne 0 ]; then
-            exit 1
-          fi
 
           mkdir -p ~/.ssh
           printf '%s\n' "${DO_SSH_KEY}" > ~/.ssh/do_deploy_key
           chmod 600 ~/.ssh/do_deploy_key
 
-          ssh-keyscan -p "${DO_PORT:-22}" "${DO_HOST}" >> ~/.ssh/known_hosts
+          ssh-keyscan -p 22 "${DO_HOST}" >> ~/.ssh/known_hosts
 
-          ssh -i ~/.ssh/do_deploy_key -p "${DO_PORT:-22}" "${DO_USER}@${DO_HOST}" <<'EOF'
+          ssh -i ~/.ssh/do_deploy_key -p 22 "${DO_USER}@${DO_HOST}" <<'EOF'
           set -euo pipefail
           cd /var/www/shinhai
           git pull --ff-only origin main
-          bash scripts/deploy.sh
+          pnpm install
+          pnpm build
+          pm2 restart shinhai
           EOF
