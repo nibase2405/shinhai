@@ -1,0 +1,43 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: digitalocean-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy Droplet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        env:
+          DO_HOST: ${{ secrets.DO_HOST }}
+          DO_USER: ${{ secrets.DO_USER }}
+          DO_PORT: ${{ secrets.DO_PORT }}
+          DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${DO_HOST}" ] || [ -z "${DO_USER}" ] || [ -z "${DO_SSH_KEY}" ]; then
+            echo "::warning::Missing one of required secrets: DO_HOST, DO_USER, DO_SSH_KEY. Deployment skipped."
+            exit 0
+          fi
+
+          mkdir -p ~/.ssh
+          printf '%s\n' "${DO_SSH_KEY}" > ~/.ssh/do_deploy_key
+          chmod 600 ~/.ssh/do_deploy_key
+
+          ssh-keyscan -p "${DO_PORT:-22}" "${DO_HOST}" >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/do_deploy_key -p "${DO_PORT:-22}" "${DO_USER}@${DO_HOST}" <<'EOF'
+          set -euo pipefail
+          cd /var/www/shinhai
+          git pull --ff-only origin main
+          bash scripts/deploy.sh
+          EOF

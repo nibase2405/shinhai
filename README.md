@@ -178,6 +178,27 @@ git pull
 bash scripts/deploy.sh
 ```
 
+### DigitalOcean 自動部署
+
+`.github/workflows/deploy-digitalocean.yml` 會在 `main` 分支 push 後自動 SSH 到 Droplet，執行：
+
+```bash
+cd /var/www/shinhai
+git pull --ff-only origin main
+bash scripts/deploy.sh
+```
+
+GitHub repo 需要設定 Actions Secrets：
+
+```text
+DO_HOST=206.189.43.34
+DO_USER=root
+DO_PORT=22
+DO_SSH_KEY=你的 private SSH key
+```
+
+Droplet 上的 `/var/www/shinhai` 需要先完成一次手動 clone，並確保 `git pull origin main` 可以成功。
+
 ## 主要目錄
 
 ```text
