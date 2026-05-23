@@ -178,6 +178,8 @@ git pull
 bash scripts/deploy.sh
 ```
 
+部署腳本預設使用 `pnpm@10.18.3`，可在 Node 20 Droplet 上執行；若伺服器已升級 Node 22，也可用 `PNPM_VERSION=latest bash scripts/deploy.sh` 覆蓋。
+
 ### DigitalOcean 自動部署
 
 `.github/workflows/deploy-digitalocean.yml` 會在 `main` 分支 push 後自動 SSH 到 Droplet，執行：

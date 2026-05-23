@@ -3,11 +3,12 @@ set -euo pipefail
 
 APP_NAME="shinhai"
 APP_DIR="/var/www/shinhai"
+PNPM_VERSION="${PNPM_VERSION:-10.18.3}"
 
 cd "$APP_DIR"
 
 corepack enable
-corepack prepare pnpm@latest --activate
+corepack prepare "pnpm@${PNPM_VERSION}" --activate
 
 pnpm install --frozen-lockfile
 pnpm build
