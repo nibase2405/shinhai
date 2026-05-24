@@ -3,8 +3,12 @@ set -euo pipefail
 
 APP_DIR="/var/www/shinhai"
 LOG_FILE="/var/log/shinhai-deploy.log"
+LOCK_FILE="/tmp/shinhai-deploy.lock"
 
 cd "$APP_DIR"
+exec 9>"$LOCK_FILE"
+flock -w 600 9
+
 rm -f "$LOG_FILE"
 
 (
