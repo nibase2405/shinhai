@@ -80,7 +80,7 @@ jobs:
           fi
 
           set +e
-          deploy_output=$(ssh -i ~/.ssh/do_deploy_key -p "${DO_PORT:-22}" "${DO_USER}@${DO_HOST}" "set -euo pipefail; cd /var/www/shinhai; git pull --ff-only origin main; bash scripts/deploy-ci.sh" 2>&1)
+          deploy_output=$(ssh -i ~/.ssh/do_deploy_key -p "${DO_PORT:-22}" "${DO_USER}@${DO_HOST}" "set -euo pipefail; cd /var/www/shinhai; git pull --ff-only origin main; bash scripts/deploy.sh" 2>&1)
           deploy_status=$?
           set -e
 
