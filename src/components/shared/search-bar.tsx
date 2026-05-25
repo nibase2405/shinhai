@@ -45,7 +45,7 @@ export function SearchBar({
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full max-w-5xl min-w-0 rounded-lg border bg-card/95 p-2 shadow-sm backdrop-blur"
+      className="w-full max-w-5xl min-w-0 rounded-lg border bg-card/95 p-2 text-slate-950 shadow-sm backdrop-blur"
     >
       <div className="grid min-w-0 gap-2 md:grid-cols-[minmax(0,1fr)_150px_180px_auto]">
         <label className="flex min-w-0 items-center gap-2 rounded-md bg-background px-3">
@@ -54,7 +54,7 @@ export function SearchBar({
           <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            className="min-w-0 flex-1 border-0 px-0 shadow-none focus-visible:ring-0"
+            className="min-w-0 flex-1 border-0 px-0 text-slate-950 shadow-none placeholder:text-slate-500 focus-visible:ring-0"
             placeholder={placeholder}
           />
         </label>
@@ -65,7 +65,7 @@ export function SearchBar({
           <select
             value={type}
             onChange={(event) => updateType(event.target.value)}
-            className="h-10 min-w-0 flex-1 bg-transparent text-sm outline-none"
+            className="h-10 min-w-0 flex-1 bg-transparent text-sm text-slate-950 outline-none"
             aria-label="內容類型"
           >
             {searchTypes.map((option) => (
@@ -82,7 +82,7 @@ export function SearchBar({
           <select
             value={district}
             onChange={(event) => setDistrict(event.target.value)}
-            className="h-10 min-w-0 flex-1 bg-transparent text-sm outline-none"
+            className="h-10 min-w-0 flex-1 bg-transparent text-sm text-slate-950 outline-none"
             aria-label="上海行政區"
           >
             <option value="all">全部行政區</option>
