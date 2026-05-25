@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Building2, Castle, FerrisWheel, MapPin, ShoppingBag, Soup, TrainFront } from "lucide-react";
 import { AdsenseSlot } from "@/components/shared/adsense-slot";
 import { AffiliateCard } from "@/components/shared/affiliate-card";
+import { ContentCarousel } from "@/components/shared/content-carousel";
 import { SearchBar } from "@/components/shared/search-bar";
 import { ArticleCard } from "@/components/cards/article-card";
 import { AttractionCard } from "@/components/cards/attraction-card";
@@ -21,9 +22,9 @@ const categories = [
 
 export default function HomePage() {
   const featuredArticles = articles.slice(0, 3);
-  const featuredAttractions = attractions.filter((item) => item.is_featured).slice(0, 3);
-  const featuredRestaurants = restaurants.filter((item) => item.is_featured).slice(0, 3);
-  const featuredHotels = hotels.filter((item) => item.is_featured).slice(0, 3);
+  const featuredAttractions = attractions.filter((item) => item.is_featured);
+  const featuredRestaurants = restaurants.filter((item) => item.is_featured);
+  const featuredHotels = hotels.filter((item) => item.is_featured);
   const klookLinks = affiliateLinks.filter((link) => link.provider === "klook");
   const hotelLinks = affiliateLinks.filter((link) => link.provider === "agoda" || link.provider === "booking");
 
@@ -81,27 +82,27 @@ export default function HomePage() {
         ))}
       </HomeSection>
 
-      <HomeSection title="熱門景點" href="/attractions">
+      <ContentCarousel title="熱門景點" href="/attractions">
         {featuredAttractions.map((attraction) => (
           <AttractionCard key={attraction.id} attraction={attraction} />
         ))}
-      </HomeSection>
+      </ContentCarousel>
 
       <div className="container-page">
         <AdsenseSlot placement="home_middle_728x90" size="728x90" className="min-h-[90px]" />
       </div>
 
-      <HomeSection title="推薦美食" href="/food">
+      <ContentCarousel title="推薦美食" href="/food">
         {featuredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.id} restaurant={restaurant} />
         ))}
-      </HomeSection>
+      </ContentCarousel>
 
-      <HomeSection title="推薦住宿" href="/hotels">
+      <ContentCarousel title="推薦住宿" href="/hotels">
         {featuredHotels.map((hotel) => (
           <HotelCard key={hotel.id} hotel={hotel} />
         ))}
-      </HomeSection>
+      </ContentCarousel>
 
       <section className="container-page grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="min-w-0 space-y-4">
