@@ -7,7 +7,10 @@
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "cf:build": "pnpm --filter shanghai-travel-cloudflare-site cf:types && pnpm --filter shanghai-travel-cloudflare-site typecheck",
+    "cf:deploy": "pnpm --filter shanghai-travel-cloudflare-site deploy",
+    "cf:dry-run": "pnpm --filter shanghai-travel-cloudflare-site dry-run"
   },
   "dependencies": {
     "@supabase/ssr": "latest",
