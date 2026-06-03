@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Shanghai Travel">
+  <rect width="64" height="64" rx="14" fill="#0b63ce"/>
+  <path d="M12 46c8-7 17-7 24 0 5-4 11-5 18-2" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M18 38V24l9 5v9m7 0V17l8 7v14m9 0V28" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="13" r="7" fill="#f5a623"/>
+</svg>

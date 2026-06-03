@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "shanghai-travel-serverless-site",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-03",
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "SITE_NAME": "上海旅遊攻略網",
+    "ORIGIN_SITE_URL": "https://kimbowl.cc"
+  }
+}

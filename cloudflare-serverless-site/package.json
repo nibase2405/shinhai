@@ -1,0 +1,18 @@
+{
+  "name": "shanghai-travel-cloudflare-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.2.2",
+  "scripts": {
+    "dev": "wrangler dev --local --port 8787",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run",
+    "typecheck": "tsc --noEmit",
+    "cf:types": "wrangler types worker-configuration.d.ts"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "wrangler": "^4.96.0"
+  }
+}

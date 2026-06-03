@@ -2,6 +2,7 @@
   "name": "shinehai-travel",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.2.2",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
@@ -14,15 +15,13 @@
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "ws": "^8.21.0"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/ws": "^8.18.1",
     "eslint": "^9.39.1",
     "eslint-config-next": "latest",
     "tailwindcss": "latest",

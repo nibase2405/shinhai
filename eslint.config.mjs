@@ -5,7 +5,17 @@ const eslintConfig = [
   ...nextVitals,
   ...nextTypescript,
   {
-    ignores: [".tools/**", ".tmp/**", "node_modules/**", ".next/**", "out/**"]
+    ignores: [
+      ".tools/**",
+      ".tmp/**",
+      "node_modules/**",
+      ".next/**",
+      ".open-next/**",
+      ".wrangler/**",
+      "out/**",
+      "vietnamese to china travel/**",
+      "cloudflare-serverless-site/worker-configuration.d.ts"
+    ]
   }
 ];
 

@@ -1,3 +1,9 @@
+packages:
+  - "."
+  - "cloudflare-serverless-site"
+
 allowBuilds:
+  esbuild: true
   sharp: true
   unrs-resolver: true
+  workerd: true

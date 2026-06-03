@@ -1,0 +1,86 @@
+name: Cloudflare Serverless Site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "cloudflare-serverless-site/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/cloudflare-serverless-site.yml"
+  pull_request:
+    paths:
+      - "cloudflare-serverless-site/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/cloudflare-serverless-site.yml"
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Deploy to Cloudflare Workers"
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  validate:
+    name: Validate Cloudflare project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Worker runtime types
+        run: pnpm --filter shanghai-travel-cloudflare-site cf:types
+
+      - name: Typecheck
+        run: pnpm --filter shanghai-travel-cloudflare-site typecheck
+
+      - name: Wrangler dry run
+        run: pnpm --filter shanghai-travel-cloudflare-site dry-run
+
+  deploy:
+    name: Deploy Cloudflare project
+    runs-on: ubuntu-latest
+    needs: validate
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy to Cloudflare Workers
+        run: pnpm --filter shanghai-travel-cloudflare-site deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
