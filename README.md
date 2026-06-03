@@ -156,50 +156,25 @@ NEXT_PUBLIC_SITE_URL=https://你的正式網域
 https://你的正式網域/sitemap.xml
 ```
 
-## DigitalOcean Droplet 部署
+## Cloudflare Serverless 部署
 
-本專案可用 Nginx + PM2 部署在 Droplet。預設 production app 目錄為 `/var/www/shinhai`，PM2 app 名稱為 `shinhai`，Next.js 監聽 `127.0.0.1:3100`。
+本專案目前不綁定 DigitalOcean Droplet，也不使用 GitHub Actions SSH 到 Droplet 部署。
 
-首次部署：
-
-```bash
-cd /var/www/shinhai
-pnpm install --frozen-lockfile
-pnpm build
-pm2 start ecosystem.config.cjs --only shinhai
-pm2 save
-```
-
-後續更新：
-
-```bash
-cd /var/www/shinhai
-git pull
-bash scripts/deploy.sh
-```
-
-部署腳本預設使用 `pnpm@10.18.3`，可在 Node 20 Droplet 上執行；若伺服器已升級 Node 22，也可用 `PNPM_VERSION=latest bash scripts/deploy.sh` 覆蓋。
-
-### DigitalOcean 自動部署
-
-`.github/workflows/deploy-digitalocean.yml` 會在 `main` 分支 push 後自動 SSH 到 Droplet，執行：
-
-```bash
-cd /var/www/shinhai
-git pull --ff-only origin main
-bash scripts/deploy.sh
-```
-
-GitHub repo 需要設定 Actions Secrets：
+Cloudflare Dashboard 請使用：
 
 ```text
-DO_HOST=206.189.43.34
-DO_USER=root
-DO_PORT=22
-DO_SSH_KEY=你的 private SSH key
+Build command: pnpm cf:build
+Deploy command: pnpm cf:deploy
+Root directory: 留空
 ```
 
-Droplet 上的 `/var/www/shinhai` 需要先完成一次手動 clone，並確保 `git pull origin main` 可以成功。
+Cloudflare 相關設定：
+
+```text
+wrangler.jsonc
+cloudflare-serverless-site/wrangler.jsonc
+.github/workflows/cloudflare-serverless-site.yml
+```
 
 ## 主要目錄
 
