@@ -37,6 +37,13 @@ pnpm dry-run
 pnpm deploy
 ```
 
+Cloudflare 後台如果從 repo 根目錄執行 `npx wrangler deploy`，會使用根目錄的 `wrangler.jsonc`，它會明確指向此子專案：
+
+```text
+main = cloudflare-serverless-site/src/index.ts
+assets = cloudflare-serverless-site/public
+```
+
 ## GitHub Actions
 
 `.github/workflows/cloudflare-serverless-site.yml` 會在 PR / push 修改此資料夾時執行驗證：

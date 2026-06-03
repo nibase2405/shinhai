@@ -8,12 +8,14 @@ on:
       - "cloudflare-serverless-site/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
+      - "wrangler.jsonc"
       - ".github/workflows/cloudflare-serverless-site.yml"
   pull_request:
     paths:
       - "cloudflare-serverless-site/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
+      - "wrangler.jsonc"
       - ".github/workflows/cloudflare-serverless-site.yml"
   workflow_dispatch:
     inputs:

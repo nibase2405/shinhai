@@ -1,10 +1,10 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
+  "$schema": "./cloudflare-serverless-site/node_modules/wrangler/config-schema.json",
   "name": "shinhai",
-  "main": "src/index.ts",
+  "main": "cloudflare-serverless-site/src/index.ts",
   "compatibility_date": "2026-06-03",
   "assets": {
-    "directory": "public",
+    "directory": "cloudflare-serverless-site/public",
     "binding": "ASSETS"
   },
   "observability": {
